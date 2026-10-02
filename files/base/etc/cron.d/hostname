@@ -1,0 +1,2 @@
+# set the hostname based on public ip address on every reboot
+@reboot root hostnamectl hostname $(curl --fail --silent --show-error ifconfig.me | tr . -)

@@ -1,0 +1,6 @@
+#!/bin/sh
+# show the end of the machine lifetime in the message of the day
+
+expires=$(systemctl show expire.timer --property=NextElapseUSecRealtime --value)
+[ -n "${expires}" ] && printf '\n*** This machine will be terminated on %s ***\n\n' "${expires}"
+exit 0

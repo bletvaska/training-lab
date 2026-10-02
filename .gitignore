@@ -1,0 +1,4 @@
+# never commit credentials
+*.csv
+*.pem
+.env

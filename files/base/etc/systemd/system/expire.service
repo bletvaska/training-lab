@@ -1,0 +1,7 @@
+[Unit]
+Description=Power off the machine at the end of its lifetime
+
+[Service]
+Type=oneshot
+# with shutdown behavior "terminate" in the launch template, EC2 terminates the instance
+ExecStart=/usr/bin/systemctl poweroff

@@ -1,0 +1,6 @@
+# set HOSTIP and update PATH
+export HOSTIP=$(hostname | tr - .)
+export PATH="$HOME/.local/bin:$PATH"
+
+# init starship for bash
+eval "$(starship init bash)"

@@ -1,0 +1,10 @@
+[Unit]
+Description=End of the machine lifetime
+
+[Timer]
+# the date is set by the provisioning in expire.timer.d/date.conf
+# change it with: systemctl edit expire.timer
+Persistent=true
+
+[Install]
+WantedBy=timers.target
