@@ -20,12 +20,12 @@ docker: base docker-packages docker-swap docker-engine docker-tools docker-dotfi
 
 
 # common setup for all trainings
-base: base-packages base-hostname base-timezone base-expire base-ssh base-journald base-starship base-user
+base: base-packages base-hostname base-timezone base-expire base-ssh base-journald base-starship base-user base-vscode
 
 
 # check all scripts with shellcheck (run on the development machine)
 lint:
-    shellcheck --external-sources bootstrap.bash lib/*.bash scripts/*/*.bash files/*/etc/update-motd.d/*
+    shellcheck --external-sources bootstrap.bash lib/*.bash scripts/*/*.bash files/*/etc/update-motd.d/* files/*/usr/local/bin/*
 
 
 [group('base')]
@@ -59,6 +59,10 @@ base-starship:
 [group('base')]
 base-user:
     scripts/base/user.bash
+
+[group('base')]
+base-vscode:
+    scripts/base/vscode.bash
 
 
 [group('docker')]
