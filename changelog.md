@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.5] - 2026-10-02
+
 ### Added
 
 - Provisioning is configured by the tags of the instance (`Profile`, `Training`, `Name`,
