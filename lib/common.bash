@@ -16,13 +16,12 @@ fi
 
 
 # global variables
-_root=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
-readonly _root
-readonly _user="ubuntu"
-readonly _home="/home/${_user}"
-readonly _timezone="Europe/Bratislava"
+PROJECT_ROOT=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
+readonly PROJECT_ROOT
+readonly USER_NAME="ubuntu"
+readonly USER_HOME="/home/${USER_NAME}"
 
-export HOME="${_home}"
+export HOME="${USER_HOME}"
 
 
 # functions
@@ -79,7 +78,7 @@ function install_file(){
     local path="${2:?Path is missing.}"
     local mode="${3:-644}"
 
-    install -D --mode="${mode}" "${_root}/files/${profile}/${path}" "/${path}"
+    install -D --mode="${mode}" "${PROJECT_ROOT}/files/${profile}/${path}" "/${path}"
 }
 
 
@@ -87,12 +86,12 @@ function install_file(){
 function install_user_file(){
     local profile="${1:?Profile is missing.}"
     local path="${2:?Path is missing.}"
-    local target="${_home}/${path}"
+    local target="${USER_HOME}/${path}"
 
     # created as the user, so also the intermediate directories are owned by the user
-    runuser --user "${_user}" -- mkdir --parents "$(dirname "${target}")"
-    install --owner="${_user}" --group="${_user}" --mode=644 \
-        "${_root}/files/${profile}/home/${path}" "${target}"
+    runuser --user "${USER_NAME}" -- mkdir --parents "$(dirname "${target}")"
+    install --owner="${USER_NAME}" --group="${USER_NAME}" --mode=644 \
+        "${PROJECT_ROOT}/files/${profile}/home/${path}" "${target}"
 }
 
 

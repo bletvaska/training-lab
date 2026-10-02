@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
-# shellcheck source=SCRIPTDIR/../../lib/common.bash
-source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.bash"
+include ../../lib/common || exit 1
 
-log "Setting Timezone: ${_timezone}"
+readonly timezone="Europe/Bratislava"
 
-timedatectl set-timezone "${_timezone}"
+
+function main(){
+    log "Setting Timezone: ${timezone}"
+
+    timedatectl set-timezone "${timezone}"
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi

@@ -1,20 +1,46 @@
 #!/usr/bin/env bash
-# shellcheck source=SCRIPTDIR/../../lib/common.bash
-source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.bash"
+include ../../lib/common || exit 1
 
 readonly lifetime="${LIFETIME:-30 days}"
+readonly dropin="/etc/systemd/system/expire.timer.d/date.conf"
 
-expires=$(date --date="+${lifetime}" "+%F %H:%M")
-readonly expires
 
-log "Setting End of Machine Lifetime: ${expires}"
+function compute_expiration(){
+    date --date="+${lifetime}" "+%F %H:%M"
+}
 
-install_file base etc/systemd/system/expire.service
-install_file base etc/systemd/system/expire.timer
-install_file base etc/update-motd.d/99-expire 755
 
-mkdir --parents /etc/systemd/system/expire.timer.d
-printf '[Timer]\nOnCalendar=%s\n' "${expires}" > /etc/systemd/system/expire.timer.d/date.conf
+function install_units(){
+    install_file base etc/systemd/system/expire.service
+    install_file base etc/systemd/system/expire.timer
+    install_file base etc/update-motd.d/99-expire 755
+}
 
-systemctl daemon-reload
-systemctl enable --now expire.timer
+
+function set_expiration(){
+    local expires="${1:?Date of expiration is missing.}"
+    local file="${2:-${dropin}}"
+
+    mkdir --parents "$(dirname "${file}")"
+    printf '[Timer]\nOnCalendar=%s\n' "${expires}" > "${file}"
+}
+
+
+function main(){
+    local expires
+    expires=$(compute_expiration)
+
+    log "Setting End of Machine Lifetime: ${expires}"
+
+    install_units
+    set_expiration "${expires}"
+
+    systemctl daemon-reload
+    systemctl enable --now expire.timer
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi

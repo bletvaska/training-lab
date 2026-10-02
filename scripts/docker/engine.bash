@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
-# shellcheck source=SCRIPTDIR/../../lib/common.bash
-source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.bash"
+include ../../lib/common || exit 1
 
-log "Installing Docker."
+function main(){
+    log "Installing Docker."
 
-# limit size of docker container logs and build cache
-# must exist before docker installation, so the daemon starts with it
-install_file docker etc/docker/daemon.json
+    # limit size of docker container logs and build cache
+    # must exist before docker installation, so the daemon starts with it
+    install_file docker etc/docker/daemon.json
 
-fetch https://get.docker.com/ | sh
-usermod --append --groups docker "${_user}"
+    fetch https://get.docker.com/ | sh
+    usermod --append --groups docker "${USER_NAME}"
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi

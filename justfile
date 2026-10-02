@@ -6,6 +6,9 @@ set shell := ["bash", "-o", "errexit", "-o", "pipefail", "-o", "nounset", "-c"]
 export DEBIAN_FRONTEND := "noninteractive"
 export NEEDRESTART_MODE := "a"
 
+# makes the include function available in all scripts, see lib/include.bash
+export BASH_ENV := justfile_directory() / "lib/include.bash"
+
 # enable tracing of the scripts with: just DEBUG=1 <recipe>
 export DEBUG := env("DEBUG", "")
 

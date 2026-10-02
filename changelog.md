@@ -7,6 +7,16 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Changed
+
+- Scripts in `scripts/` are split into small functions called from `main`
+  and `bootstrap.bash` has its steps in `main`; `main` runs only when the script
+  is executed directly, so the scripts can be sourced and tested.
+- Scripts load libraries with `include ../../lib/common` relative to their location,
+  `just` provides the `include` function through `BASH_ENV`; without it the scripts stop.
+- Global variables of `lib/common.bash` renamed to `PROJECT_ROOT`, `USER_NAME`
+  and `USER_HOME`; timezone moved to `scripts/base/timezone.bash`.
+
 ## [2026.10.2] - 2026-10-02
 
 ### Added

@@ -1,19 +1,36 @@
 #!/usr/bin/env bash
-# shellcheck source=SCRIPTDIR/../../lib/common.bash
-source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.bash"
+include ../../lib/common || exit 1
 
-log "Creating Swap."
+readonly swapfile="/swap"
+readonly size="2G"
 
-# swap file 2G in /swap
-if [[ ! -f /swap ]]; then
-    fallocate -l 2G /swap
-    chmod 600 /swap
-    mkswap /swap
+
+function create_swapfile(){
+    if [[ ! -f "${swapfile}" ]]; then
+        fallocate -l "${size}" "${swapfile}"
+        chmod 600 "${swapfile}"
+        mkswap "${swapfile}"
+    fi
+}
+
+
+function activate_swap(){
+    if ! swapon --show=NAME --noheadings | grep --quiet --line-regexp "${swapfile}"; then
+        swapon "${swapfile}"
+    fi
+}
+
+
+function main(){
+    log "Creating Swap."
+
+    create_swapfile
+    activate_swap
+    append_line_if_not_exists /etc/fstab "${swapfile} none swap sw 0 0"
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
 fi
-
-# activate swap
-if ! swapon --show=NAME --noheadings | grep --quiet --line-regexp /swap; then
-    swapon /swap
-fi
-
-append_line_if_not_exists /etc/fstab "/swap none swap sw 0 0"

@@ -45,6 +45,14 @@ Profiles: `base` (common for all trainings), `docker`.
 
 Each step can be run separately as root on the target machine, e.g. `just docker-tools`.
 
+Scripts load the libraries with `include ../../lib/common || exit 1` (similar to `load` in bats),
+which is relative to the script. `just` makes the `include` function available through
+`BASH_ENV`. Without it the script stops immediately. To run a script without `just`, set it yourself:
+
+```
+BASH_ENV=lib/include.bash scripts/docker/tools.bash
+```
+
 ## Debugging
 
 Scripts print only their steps and the place of an error. To trace all commands,

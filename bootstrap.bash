@@ -20,14 +20,26 @@ export LIFETIME="30 days"
 # if not set, the password is not set and ssh login with password stays disabled
 # export USER_PASSWORD_HASH='CHANGE-ME'
 
-set -o xtrace   # print commands and their arguments as they are executed
 
-export DEBIAN_FRONTEND="noninteractive"
+function main(){
+    set -o xtrace   # print commands and their arguments as they are executed
 
-apt-get update
-apt-get full-upgrade --yes
-apt-get install --yes git just
+    export DEBIAN_FRONTEND="noninteractive"
 
-git clone --depth 1 --branch "${branch}" "${repository}" "${target}"
-git -C "${target}" rev-parse HEAD > /etc/training-lab-release
-just --justfile "${target}/justfile" "${training}"
+    # update the system and install tools for the provisioning
+    apt-get update
+    apt-get full-upgrade --yes
+    apt-get install --yes git just
+
+    # get the provisioning and remember the commit used for it
+    git clone --depth 1 --branch "${branch}" "${repository}" "${target}"
+    git -C "${target}" rev-parse HEAD > /etc/training-lab-release
+
+    just --justfile "${target}/justfile" "${training}"
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi

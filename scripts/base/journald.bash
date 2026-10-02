@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
-# shellcheck source=SCRIPTDIR/../../lib/common.bash
-source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.bash"
+include ../../lib/common || exit 1
 
-log "Limiting Size of Journal."
+function main(){
+    log "Limiting Size of Journal."
 
-install_file base etc/systemd/journald.conf.d/size.conf
+    install_file base etc/systemd/journald.conf.d/size.conf
 
-# apply the configuration, useful when the step runs separately
-systemctl try-reload-or-restart systemd-journald
+    # apply the configuration, useful when the step runs separately
+    systemctl try-reload-or-restart systemd-journald
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi

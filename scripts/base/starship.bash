@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
-# shellcheck source=SCRIPTDIR/../../lib/common.bash
-source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.bash"
+include ../../lib/common || exit 1
 
-log "Installing Starship."
+function main(){
+    log "Installing Starship."
 
-fetch https://starship.rs/install.sh | sh -s -- -y
+    fetch https://starship.rs/install.sh | sh -s -- -y
+}
+
+
+# call the func only if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi
