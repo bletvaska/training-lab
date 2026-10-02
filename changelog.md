@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.4] - 2026-10-02
+
 ### Changed
 
 - `bootstrap.bash` no longer traces its commands with `xtrace`.
