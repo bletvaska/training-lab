@@ -7,6 +7,16 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Added
+
+- Provisioning is configured by the tags of the instance (`Profile`, `Training`, `Name`,
+  `Lifetime`), so one launch template serves all trainings; the default profile is `docker`.
+
+### Fixed
+
+- `apt-get` waits for the dpkg lock held by other apt processes after boot
+  (`DPkg::Lock::Timeout`) and `apt-get update` is retried, instead of failing.
+
 ## [2026.10.4] - 2026-10-02
 
 ### Changed
