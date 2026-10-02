@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.3] - 2026-10-02
+
 ### Changed
 
 - Scripts in `scripts/` are split into small functions called from `main`
