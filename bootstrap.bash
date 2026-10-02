@@ -22,8 +22,6 @@ export LIFETIME="30 days"
 
 
 function main(){
-    set -o xtrace   # print commands and their arguments as they are executed
-
     export DEBIAN_FRONTEND="noninteractive"
 
     # update the system and install tools for the provisioning

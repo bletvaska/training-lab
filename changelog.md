@@ -7,6 +7,15 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Changed
+
+- `bootstrap.bash` no longer traces its commands with `xtrace`.
+
+### Fixed
+
+- Reboot at the end of the provisioning is delayed by one minute, so cloud-init
+  finishes its final stage; the immediate reboot killed it (`BrokenPipeError`).
+
 ## [2026.10.3] - 2026-10-02
 
 ### Changed

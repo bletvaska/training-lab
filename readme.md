@@ -10,7 +10,7 @@ Provisioning of EC2 machines (Ubuntu) for trainings.
    to set the user password and enable SSH login with it. Without it, only SSH keys work.
 3. Launch the instance. The bootstrap updates the system, installs `git` and `just`,
    clones this repository to `/tmp/provisioning` and runs `just <training>`.
-   The machine reboots at the end, which also removes the repository from `/tmp`.
+   The machine reboots one minute after the end, which also removes the repository from `/tmp`.
    If the provisioning fails, the machine does not reboot and the repository stays there.
 
 The commit used for the provisioning is stored in `/etc/training-lab-release`.

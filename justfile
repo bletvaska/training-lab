@@ -96,6 +96,7 @@ cleanup:
     apt-get clean
 
 # clean up and reboot at the end of provisioning, common for all trainings
+# the reboot is delayed, so cloud-init can finish its final stage first
 [group('base')]
 finish: cleanup
-    reboot
+    shutdown --reboot +1 "Provisioning finished, rebooting."
