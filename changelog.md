@@ -7,6 +7,13 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.2] - 2026-10-02
+
+### Added
+
+- `vscode-server-cleanup.bash`: removes old versions of VS Code Server from the user's
+  home directory every midnight, keeps the two latest ones.
+
 ## [2026.10.1] - 2026-10-02
 
 ### Added
@@ -23,8 +30,6 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 - Location of a failed command is logged; tracing of commands is enabled with `just DEBUG=1 <recipe>`.
 - Profile `base`: system packages, hostname from public IP address, timezone,
   SSH password authentication, journald size limit, starship, user password and dotfiles.
-- `vscode-server-cleanup.bash`: removes old versions of VS Code Server from the user's
-  home directory every midnight, keeps the two latest ones.
 - Profile `docker`: container packages (podman with `passt` and `aardvark-dns`),
   2G swap file, Docker with limited log size and build cache, grype, dive, dry,
   hadolint and bash aliases.
