@@ -2,3 +2,7 @@
 *.csv
 *.pem
 .env
+
+# local context for Claude, not shared
+CLAUDE.local.md
+notes/
