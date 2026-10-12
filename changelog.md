@@ -7,6 +7,13 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Changed
+
+- User password is set from the tag `Password` (plain text) instead of the hash
+  in `USER_PASSWORD_HASH`, so the user-data contains no settings at all;
+  SSH password authentication is enabled only with the password.
+- The password is not traced in the debug output.
+
 ## [2026.10.6] - 2026-10-12
 
 ### Added

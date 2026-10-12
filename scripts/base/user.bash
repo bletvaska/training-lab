@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 include ../../lib/common || exit 1
 
-# set user password; generate the hash with: openssl passwd -6
+# set user password from the variable USER_PASSWORD (tag Password)
+# (${USER_PASSWORD:+set} keeps the password out of the debug output)
 function set_password(){
-    if [[ -n "${USER_PASSWORD_HASH:-}" ]]; then
-        echo "${USER_NAME}:${USER_PASSWORD_HASH}" | chpasswd --encrypted
-    else
-        log "Variable USER_PASSWORD_HASH is not set, skipping user password."
+    if [[ -z "${USER_PASSWORD:+set}" ]]; then
+        log "Variable USER_PASSWORD is not set, skipping user password."
+        return
+    fi
+
+    # keep the password out of the debug output
+    { set +o xtrace; } 2>/dev/null
+    echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd
+    if [[ -n "${DEBUG:-}" ]]; then
+        set -o xtrace
     fi
 }
 

@@ -34,9 +34,10 @@ a `notes/history.md` s priebehom doterajšej spolupráce.
 - `bootstrap.bash` – user-data: `DPkg::Lock::Timeout`, `apt_update` s opakovaním, full-upgrade,
   `git` + `just`, klon do `/tmp/provisioning` (tmpfs, zmizne reštartom; pri chybe ostane na ladenie),
   commit do `/etc/training-lab-release`, tagy → premenné `PROFILE`, `TRAINING`, `STUDENT` (z `Name`),
-  `LIFETIME`, potom `just <PROFILE>`. Voliteľne `USER_PASSWORD_HASH` (hash z `openssl passwd -6`).
+  `LIFETIME`, `USER_PASSWORD` (z `Password`), potom `just <PROFILE>`. User-data sa nemení.
 - Tagy: `Profile` (predvolený `docker`; neplatný → `docker` + hláška; musí mať `scripts/<p>/`,
-  nie `base`, `^[a-z0-9-]+$`), `Training`, `Name` (zatiaľ ako študent), `Lifetime` (`30 days`).
+  nie `base`, `^[a-z0-9-]+$`), `Training`, `Name` (zatiaľ ako študent), `Lifetime` (`30 days`),
+  `Password` (čistý text; bez neho len SSH kľúč, xtrace ho nevypíše).
   V šablóne musí byť zapnuté *Allow tags in metadata* a *Shutdown behavior: Terminate*.
 - `justfile` – recepty `docker`, `base`, kroky `base-*`, `docker-*`, `cleanup`, `finish`
   (`shutdown --reboot +1`, aby cloud-init stihol dokončiť fázu final), `lint`.

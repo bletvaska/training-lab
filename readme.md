@@ -4,9 +4,7 @@ Provisioning of EC2 machines (Ubuntu) for trainings.
 
 ## Usage
 
-1. Copy `bootstrap.bash` to the user-data of the EC2 launch template.
-   Optionally uncomment `USER_PASSWORD_HASH` (generate the hash with `openssl passwd -6`)
-   to set the user password and enable SSH login with it. Without it, only SSH keys work.
+1. Copy `bootstrap.bash` to the user-data of the EC2 launch template as it is.
 2. In the launch template, enable **Allow tags in metadata**
    (`InstanceMetadataTags=enabled`) and set the tags of the instance (see below).
 3. Launch the instance. The bootstrap updates the system, installs `git` and `just`,
@@ -27,10 +25,16 @@ serves all trainings. All tags are optional.
 | `Training` | name of the training                     | empty                    |
 | `Name`     | owner of the machine (student)           | empty                    |
 | `Lifetime` | lifetime of the machine                  | `30 days`                |
+| `Password` | password of the user `ubuntu` (plain text) | none, SSH keys only    |
 
 If `Profile` names a profile that does not exist, `docker` is used and the log says so.
+With `Password`, SSH login with the password is enabled as well. Values of tags may contain
+only letters, digits, spaces and `+ - = . _ : / @`, which limits the password. The password
+is visible to anybody who sees the tags in the AWS console and inside the machine
+through the instance metadata.
+
 The bootstrap passes the values to the provisioning as the variables
-`PROFILE`, `TRAINING`, `STUDENT` and `LIFETIME`.
+`PROFILE`, `TRAINING`, `STUDENT`, `LIFETIME` and `USER_PASSWORD`.
 
 ## Lifetime
 

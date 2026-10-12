@@ -11,14 +11,15 @@ function enable_password_authentication(){
 
 
 function disable_password_authentication(){
-    log "Variable USER_PASSWORD_HASH is not set, SSH password authentication stays disabled."
+    log "Variable USER_PASSWORD is not set, SSH password authentication stays disabled."
     rm --force "/${config}"
 }
 
 
 function main(){
     # password authentication only makes sense when the user has a password
-    if [[ -n "${USER_PASSWORD_HASH:-}" ]]; then
+    # (${USER_PASSWORD:+set} keeps the password out of the debug output)
+    if [[ -n "${USER_PASSWORD:+set}" ]]; then
         enable_password_authentication
     else
         disable_password_authentication

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # EC2 user-data: prepares the machine and hands the provisioning over to just
-# copy the content to user-data of the launch template and set the variables below
+# copy the content to user-data of the launch template as it is
 # the provisioning is configured by tags of the instance, see readme.md
 
 set -o errexit  # stop when error occurs
@@ -13,11 +13,6 @@ readonly target="/tmp/provisioning"  # tmpfs, removed by the reboot at the end
 readonly default_profile="docker"
 readonly default_lifetime="30 days"
 readonly metadata="http://169.254.169.254/latest"
-
-# hash of the user password, generate with: openssl passwd -6
-# keep the single quotes, the hash contains $ characters
-# if not set, the password is not set and ssh login with password stays disabled
-# export USER_PASSWORD_HASH='CHANGE-ME'
 
 
 # prints the value of the instance tag; fails, if the tag does not exist
@@ -87,8 +82,9 @@ function main(){
     TRAINING=$(get_tag Training || true)
     STUDENT=$(get_tag Name || true)
     LIFETIME=$(get_tag Lifetime || echo "${default_lifetime}")
+    USER_PASSWORD=$(get_tag Password || true)
     PROFILE=$(get_profile)
-    export TRAINING STUDENT LIFETIME PROFILE
+    export TRAINING STUDENT LIFETIME USER_PASSWORD PROFILE
 
     just --justfile "${target}/justfile" "${PROFILE}"
 }
