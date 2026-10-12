@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.6] - 2026-10-12
+
 ### Added
 
 - Profile `kubernetes`: k3s (with its kubectl), helm, kompose, k9s, kubecolor, kubeconform,
