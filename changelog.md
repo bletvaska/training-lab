@@ -7,6 +7,19 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Added
+
+- Profile `kubernetes`: k3s (with its kubectl), helm, kompose, k9s, kubecolor, kubeconform,
+  stern, popeye, kubectx/kubens, fzf, krew, bash completions, kubeconfig for the user
+  (`KUBECONFIG` in `.bashrc.kubernetes`), aliases, starship config and YAML templates.
+- `lib/common.bash`: `install_binary_from_github`, `install_completion`.
+
+### Changed
+
+- `get_github_latest_release` fails, if the release asset is missing or ambiguous.
+- Starship is installed from the Ubuntu package instead of its install script,
+  recipe `base-starship` removed.
+
 ## [2026.10.5] - 2026-10-02
 
 ### Added

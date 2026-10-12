@@ -1,0 +1,5 @@
+[kubernetes]
+format = '[$symbol$namespace]($style) in '
+disabled = false
+style = 'cyan bold'
+

@@ -1,0 +1,5 @@
+# kubectl of k3s prefers /etc/rancher/k3s/k3s.yaml, which only root can read
+export KUBECONFIG="$HOME/.kube/config"
+
+# plugins installed by krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

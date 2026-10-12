@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 include ../../lib/common || exit 1
 
-readonly packages=(btop bat figlet httpie jq mc nmap python-is-python3 python3-venv tree unzip vim)
+readonly packages=(btop bat figlet httpie jq mc nmap python-is-python3 python3-venv starship tree unzip vim)
 
 
 function main(){

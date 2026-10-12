@@ -72,8 +72,10 @@ a `notes/history.md` s priebehom doterajšej spolupráce.
    majú obsahovať profil, `Training`, `Name`, verziu, trvanie, prípadne verziu šablóny.
 2. **MOTD** s `Training` a študentom (`STUDENT`).
 3. **Balíky ako dáta**: napr. `profiles/<p>/packages.txt` + spoločný inštalátor.
-4. **Profil `kubernetes`** – používateľ má podobný skript, cestu zatiaľ neposlal;
-   pri kubeadm pozor na swap (je preto v profile `docker`, nie `base`).
+4. **Profil `kubernetes`** (k3s) – vytvorený, čaká na test na EC2. kubectl je z k3s (verzia
+   zodpovedá clusteru); kubectl z k3s uprednostňuje `/etc/rancher/k3s/k3s.yaml`, preto
+   `KUBECONFIG` v `.bashrc.kubernetes`. glasskube vynechaný (archivovaný). Architektúra len amd64
+   (t3.medium). Swap len v profile `docker`.
 5. **`just launch`** na vývojovom stroji (AWS CLI `run-instances` s tagmi, `Name=student@training`).
 6. Voliteľné: `require("shellcheck")` v `lint` (odložené), zjednodušenie `scripts/docker/tools.bash`,
    `apt_update` aj v `lib/common.bash`.

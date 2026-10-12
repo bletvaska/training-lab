@@ -58,7 +58,7 @@ files/<profile>/    files installed to the machine; the path mirrors the target,
                     files/<profile>/home/ goes to the home directory of the user
 ```
 
-Profiles: `base` (common for all trainings), `docker`.
+Profiles: `base` (common for all trainings), `docker`, `kubernetes`.
 
 Each step can be run separately as root on the target machine, e.g. `just docker-tools`.
 

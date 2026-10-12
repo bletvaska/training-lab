@@ -22,8 +22,12 @@ default:
 docker: base docker-packages docker-swap docker-engine docker-tools docker-dotfiles finish
 
 
+# provision the machine for the Kubernetes training
+kubernetes: base kubernetes-packages kubernetes-k3s kubernetes-tools kubernetes-user kubernetes-dotfiles finish
+
+
 # common setup for all trainings
-base: base-packages base-hostname base-timezone base-expire base-ssh base-journald base-starship base-user base-vscode
+base: base-packages base-hostname base-timezone base-expire base-ssh base-journald base-user base-vscode
 
 
 # check all scripts with shellcheck (run on the development machine)
@@ -56,10 +60,6 @@ base-journald:
     scripts/base/journald.bash
 
 [group('base')]
-base-starship:
-    scripts/base/starship.bash
-
-[group('base')]
 base-user:
     scripts/base/user.bash
 
@@ -87,6 +87,27 @@ docker-tools:
 [group('docker')]
 docker-dotfiles:
     scripts/docker/dotfiles.bash
+
+
+[group('kubernetes')]
+kubernetes-packages:
+    scripts/kubernetes/packages.bash
+
+[group('kubernetes')]
+kubernetes-k3s:
+    scripts/kubernetes/k3s.bash
+
+[group('kubernetes')]
+kubernetes-tools:
+    scripts/kubernetes/tools.bash
+
+[group('kubernetes')]
+kubernetes-user:
+    scripts/kubernetes/user.bash
+
+[group('kubernetes')]
+kubernetes-dotfiles:
+    scripts/kubernetes/dotfiles.bash
 
 
 # remove unused packages and apt cache
