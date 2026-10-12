@@ -7,6 +7,12 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Fixed
+
+- needrestart does not restart `cloud-init-main.service` during the provisioning;
+  it restarted cloud-init after apt runs of AWS SSM, because the exception of Ubuntu
+  covers only the service names of older cloud-init.
+
 ## [2026.10.7] - 2026-10-12
 
 ### Changed

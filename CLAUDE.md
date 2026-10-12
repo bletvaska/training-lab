@@ -60,6 +60,9 @@ a `notes/history.md` s priebehom doterajšej spolupráce.
 - Zámok po štarte môže držať aj **AWS SSM Patch Manager** (dokument `PatchLinux`),
   ktorý inštaluje `python3-apt` a patchuje.
 - Okamžitý `reboot` v user-data zabil `cloud-final` (`BrokenPipeError`) → odložený reštart.
+- needrestart po apt (napr. od SSM) reštartoval `cloud-init-main.service`; výnimka Ubuntu
+  pokrýva len staré názvy `cloud-(init-local|init|config|final)` → vlastná výnimka v bootstrape.
+  Bootstrap vtedy prežil len vďaka `KillMode=process`.
 - IMDS tagy fungujú vrátane medzier a `@`; zobrazujú sa aj `aws:ec2launchtemplate:id/version`.
   Zápis tagov zo stroja by vyžadoval IAM rolu + AWS CLI (zamietnuté).
 - `dockerd --validate` nekontroluje kľúče v sekcii `builder`; `defaultKeepStorage` podľa dokumentácie.

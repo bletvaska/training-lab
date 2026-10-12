@@ -69,6 +69,13 @@ function main(){
     # so apt-get waits for it instead of failing
     echo 'DPkg::Lock::Timeout "600";' > /etc/apt/apt.conf.d/90-lock-timeout
 
+    # needrestart must not restart cloud-init, which runs this provisioning;
+    # the exception of Ubuntu does not cover cloud-init-main.service of cloud-init 26
+    mkdir --parents /etc/needrestart/conf.d
+    # shellcheck disable=SC2016
+    echo '$nrconf{override_rc}{qr(^cloud-init-main\.service$)} = 0;' \
+        > /etc/needrestart/conf.d/90-cloud-init-main.conf
+
     # update the system and install tools for the provisioning
     apt_update
     apt-get full-upgrade --yes
