@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.7] - 2026-10-12
+
 ### Changed
 
 - User password is set from the tag `Password` (plain text) instead of the hash
