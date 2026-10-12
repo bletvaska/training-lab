@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.8] - 2026-10-12
+
 ### Fixed
 
 - needrestart does not restart `cloud-init-main.service` during the provisioning;
