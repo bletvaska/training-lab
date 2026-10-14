@@ -11,6 +11,12 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 - Service template contains a commented-out session affinity (`ClientIP`) with its timeout.
 
+### Removed
+
+- Package `kubectx` and symbolic links `kctx` and `kns` in the `kubernetes` profile;
+  kubectl plugins `ctx` and `ns` are not installed, so their installation with krew
+  can be shown in the training. `fzf` stays for their interactive selection.
+
 ### Fixed
 
 - Scripts run with `HOME=/root` instead of the user's home directory, so tools run as root
