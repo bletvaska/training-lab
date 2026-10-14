@@ -15,3 +15,8 @@ spec:
   selector:
     app: nginx
   type: NodePort
+  # sticky sessions: requests from the same client IP go to the same pod
+  # sessionAffinity: ClientIP
+  # sessionAffinityConfig:
+  #   clientIP:
+  #     timeoutSeconds: 10800

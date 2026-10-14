@@ -7,6 +7,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Added
+
+- Service template contains a commented-out session affinity (`ClientIP`) with its timeout.
+
 ### Fixed
 
 - Scripts run with `HOME=/root` instead of the user's home directory, so tools run as root
