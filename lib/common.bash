@@ -21,7 +21,10 @@ readonly PROJECT_ROOT
 readonly USER_NAME="ubuntu"
 readonly USER_HOME="/home/${USER_NAME}"
 
-export HOME="${USER_HOME}"
+# the scripts run as root, so tools started by them (e.g. completion generators) must not
+# create their state, cache or config directories in the user's home with root as owner;
+# cloud-init may not set HOME at all
+export HOME="/root"
 
 
 # functions

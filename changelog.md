@@ -7,6 +7,12 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+### Fixed
+
+- Scripts run with `HOME=/root` instead of the user's home directory, so tools run as root
+  during the provisioning no longer create directories owned by root there;
+  k9s failed with permission denied on `~/.local/state`.
+
 ## [2026.10.8] - 2026-10-12
 
 ### Fixed
