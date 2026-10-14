@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.9] - 2026-10-14
+
 ### Added
 
 - Service template contains a commented-out session affinity (`ClientIP`) with its timeout.
