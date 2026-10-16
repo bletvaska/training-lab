@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 include ../../lib/common || exit 1
 
-readonly templates=(configmap cronjob deployment ingress job namespace pod pv pvc secrets service)
+readonly templates=(configmap cronjob deployment hpa ingress job namespace pod pv pvc secrets service)
 
 
 function install_templates(){
