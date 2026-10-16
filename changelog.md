@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 ## [Unreleased]
 
+## [2026.10.10] - 2026-10-16
+
 ### Added
 
 - Template of HorizontalPodAutoscaler (`templates/hpa.yaml`) for the Deployment `nginx`
