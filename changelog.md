@@ -11,6 +11,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (`YYYY.M.
 
 - Template of HorizontalPodAutoscaler (`templates/hpa.yaml`) for the Deployment `nginx`
   with CPU utilization; memory metric and scale down behavior are commented out.
+- Deployment template sets resource requests of the container (`100m` CPU, `64Mi` memory),
+  so the HPA can compute the utilization, and limits (`500m` CPU, `128Mi` memory).
 
 ## [2026.10.9] - 2026-10-14
 
